@@ -15,18 +15,21 @@
         <time><%= destination.arrival.toLocaleString('en-US', {timeZone: 'UTC'}) %> </time>
     </div>
     <% }) %> 
-    <div>Ticket:</div>
-  <ul>
-    <% tickets.forEach(t => %>
-      <li><%= t.seat t.price %></li> 
-    <% ).join('') %>
-  </ul>
+    <div>Tickets:</div>
+    <% if (tickets.length) { %>
+    <%tickets.forEach(function (t){%>
+  <div>Seat:<%=t.seat%></div>
+  <div>Price:$<%=t.price%></div>
+    <%})%>
+  <% } else { %>
+  <div>No tickets yet</div>
+  <%}%>
   <!-- end cast list -->
 </section>
 <!-- add to cast form below this comment -->
 <form id="add-per-to-ticket" action="/flights/<%=flight._id%>/tickets" method="POST">
   <select name="ticketId">
-    <% tickets.forEach(t => %>
+    <% tickets.forEach(t => 
      <option value="<%= t._id %>"><%= t.seat %> </option> 
     <% ).join('') %>
   </select>
