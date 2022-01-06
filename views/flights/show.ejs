@@ -24,8 +24,9 @@
   <% } else { %>
   <div>No tickets yet</div>
   <%}%>
-  <!-- end cast list -->
-</section>
+ </section>
+
+ <a href="/tickets/new/<%= flight._id %>">New Ticket</a>
 
   <br><br>
 <form id="add-destination-form" method="POST" action="/flights/<%= flight._id %>/destinations">

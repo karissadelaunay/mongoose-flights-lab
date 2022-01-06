@@ -23,7 +23,7 @@ async function addToFlight(req, res){
 async function create(req, res) {
     try {
         const ticket = await Ticket.create(req.body)
-        res.redirect('/tickets/new');
+        res.redirect(`/flights/${req.body.flight}`);
 
     } catch(err){
 
@@ -34,9 +34,11 @@ async function create(req, res) {
 async function newTicket(req, res) {
     try {
         const ticketDocuments = await Ticket.find({})
+        const flightId = req.params.flightId
         res.render('tickets/new',{
             title: 'Add Ticket',
-            tickets: ticketDocuments
+            tickets: ticketDocuments,
+            flightId
         })
 
     } catch(err) {
