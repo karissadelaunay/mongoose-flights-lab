@@ -1,0 +1,53 @@
+<%- include('../partials/header') %>
+
+<section id="show-page">
+    <div>Airline:</div>
+    <div><%= flight.airline %></div>
+    <div>Airport:</div>
+    <div><%= flight.airport %></div>
+    <div>Flight Number:</div>
+    <div><%= flight.flightNo %></div>
+    <div>Departs:</div>
+    <div><time><%= flight.departs.toLocaleString('en-US', {timeZone: 'UTC'}) %> </time></div>
+    <div>Destinations:</div>
+    <% flight.destinations.forEach(destination => { %> 
+    <div><%= destination.airport %> 
+        <time><%= destination.arrival.toLocaleString('en-US', {timeZone: 'UTC'}) %> </time>
+    </div>
+    <% }) %> 
+    <div>Ticket:</div>
+  <ul>
+    <% tickets.forEach(t => %>
+      <li><%= t.seat t.price %></li> 
+    <% ).join('') %>
+  </ul>
+  <!-- end cast list -->
+</section>
+<!-- add to cast form below this comment -->
+<form id="add-per-to-ticket" action="/flights/<%=flight._id%>/tickets" method="POST">
+  <select name="ticketId">
+    <% tickets.forEach(t => %>
+     <option value="<%= t._id %>"><%= t.seat %> </option> 
+    <% ).join('') %>
+  </select>
+  <button type="submit">Add to Flight</button>
+</form>
+
+  <br><br>
+<form id="add-destination-form" method="POST" action="/flights/<%= flight._id %>/destinations">
+  <label>Destinations:</label>
+  <label>Airport:</label>
+    <select name="airport">
+        <option value="AUS">AUS</option>
+        <option value="DFW">DFW</option>
+        <option value="DEN">DEN</option>
+        <option value="LAX">LAX</option>
+        <option value="SAN">SAN</option>
+      </select>
+    <label>Arrival:</label>
+        <input type="date" name="arrival">
+        <input type="submit" value="Add Destination">
+    </select>
+</form>
+
+<%- include('../partials/footer') %>
