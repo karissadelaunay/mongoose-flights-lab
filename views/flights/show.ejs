@@ -26,15 +26,6 @@
   <%}%>
   <!-- end cast list -->
 </section>
-<!-- add to cast form below this comment -->
-<form id="add-per-to-ticket" action="/flights/<%=flight._id%>/tickets" method="POST">
-  <select name="ticketId">
-    <% tickets.forEach(t => 
-     <option value="<%= t._id %>"><%= t.seat %> </option> 
-    <% ).join('') %>
-  </select>
-  <button type="submit">Add to Flight</button>
-</form>
 
   <br><br>
 <form id="add-destination-form" method="POST" action="/flights/<%= flight._id %>/destinations">
